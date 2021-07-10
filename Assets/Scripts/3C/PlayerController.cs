@@ -9,10 +9,13 @@ public class PlayerController : MonoBehaviour
     private const string INPUT_INTERACT = "Interact";
 
     [SerializeField] private float m_MoveSpeed = 5f;
+    [SerializeField] private float m_RotationSpeed = 1.5f;
 
     private PlayerInput m_PlayerInput;
     private InputAction m_MoveAction;
     private InputAction m_InteractAction;
+    private Vector2 m_MoveInputs;
+    private Vector3 m_LastInputDirection;
 
     private void Awake()
     {
@@ -31,11 +34,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Vector2 input = m_MoveAction.ReadValue<Vector2>();
-        Vector3 moveInput = new Vector3(input.x, 0, input.y);
+        m_MoveInputs = m_MoveAction.ReadValue<Vector2>();
+        Vector3 moveInput = new Vector3(m_MoveInputs.x, 0, m_MoveInputs.y);
+        bool hasInput = HasInput();
         //Debug.Log("Look = " + moveInput);
 
-        if (moveInput.sqrMagnitude >= 0.01f)
+        // Move
+        if (hasInput)
         {
             Vector3 newPosition = transform.position + moveInput * Time.deltaTime * m_MoveSpeed;
             NavMeshHit hit;
@@ -44,5 +49,17 @@ public class PlayerController : MonoBehaviour
                 transform.position = hit.position;
             }
         }
+
+        // Rotate
+        Vector3 inputDirection = hasInput ? moveInput : m_LastInputDirection;
+        m_LastInputDirection = inputDirection;
+        if (inputDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(inputDirection, Vector3.up);
+            Quaternion currentRotation = Quaternion.Slerp(transform.rotation, targetRotation, m_RotationSpeed * Time.deltaTime);
+            transform.rotation = currentRotation;
+        }
     }
+
+    private bool HasInput() => m_MoveInputs.sqrMagnitude >= 0.01f;
 }
