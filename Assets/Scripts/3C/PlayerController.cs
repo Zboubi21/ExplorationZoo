@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float m_MoveSpeed = 5f;
     [SerializeField] private float m_RotationSpeed = 1.5f;
+    [Space]
+    [SerializeField] private Interactor m_Interactor = null;
 
     private PlayerInput m_PlayerInput;
     private InputAction m_MoveAction;
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private void InteractAction_Started(InputAction.CallbackContext context)
     {
         //Debug.Log("Interaction started");
+        m_Interactor.TriggerInteraction();
     }
 
     private void Update()
