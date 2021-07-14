@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AOC_Sheep
+  m_Controller: {fileID: 9100000, guid: 4359b711de9ca8b47b93b1be957cffd7, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: c761129cb2562e94bb9464abfa71cde8, type: 2}
+    m_OverrideClip: {fileID: 7400020, guid: 57957d6993a67ea43870ddfa1da3e6a2, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: ef268e0f695f9e84792d469bd82da613, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 57957d6993a67ea43870ddfa1da3e6a2, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 387d8a4c8793b4a469e298b80f71c222, type: 2}
+    m_OverrideClip: {fileID: 7400022, guid: 57957d6993a67ea43870ddfa1da3e6a2, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: dfd04c58da2189c4f86aa3f989ab16ca, type: 2}
+    m_OverrideClip: {fileID: 7400016, guid: 57957d6993a67ea43870ddfa1da3e6a2, type: 3}

@@ -5,6 +5,12 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Animal : MonoBehaviour
 {
+    /***********
+    * Constant *
+    ***********/
+    private const string ANIMAITON_MOVE_NAME = "Move";
+    private const string ANIMAITON_Carry_NAME = "Carry";
+
     /*****************
     * SerializeField *
     *****************/
@@ -16,6 +22,7 @@ public class Animal : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private InteractableCarriable m_InteractableCarriable = null;
+    [SerializeField] private Animator m_Animator = null;
 
     /**********
     * Private *
@@ -78,6 +85,7 @@ public class Animal : MonoBehaviour
     {
         m_Agent.enabled = false;
         StopCheckArea();
+        m_Animator.SetBool(ANIMAITON_Carry_NAME, true);
     }
 
     private void InteractableCarriable_OnPutedDown()
@@ -86,6 +94,12 @@ public class Animal : MonoBehaviour
             m_ReferencePosition = transform.position;
         m_Agent.enabled = true;
         CheckArea();
+        m_Animator.SetBool(ANIMAITON_Carry_NAME, false);
+    }
+
+    private void Update()
+    {
+        m_Animator.SetFloat(ANIMAITON_MOVE_NAME, m_Agent.velocity.magnitude.Remap(0, m_Agent.speed, 0, 1));
     }
 
     /*********
