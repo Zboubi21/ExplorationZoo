@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_MoveSpeed = 5f;
     [SerializeField] private float m_RotationSpeed = 1.5f;
     [Space]
-    [SerializeField] private Interactor m_Interactor = null;
+    [SerializeField] private Character m_Character = null;
 
     private PlayerInput m_PlayerInput;
     private InputAction m_MoveAction;
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private void InteractAction_Started(InputAction.CallbackContext context)
     {
         //Debug.Log("Interaction started");
-        m_Interactor.TriggerInteraction();
+        m_Character.TryTriggerInteraction();
     }
 
     private void Update()
@@ -42,18 +42,23 @@ public class PlayerController : MonoBehaviour
         bool hasInput = HasInput();
         //Debug.Log("Look = " + moveInput);
 
-        // Move
+        Move(moveInput, hasInput);
+        Rotate(moveInput, hasInput);
+    }
+
+    private void Move(Vector3 moveInput, bool hasInput)
+    {
         if (hasInput)
         {
             Vector3 newPosition = transform.position + moveInput * Time.deltaTime * m_MoveSpeed;
             NavMeshHit hit;
             if (NavMesh.SamplePosition(newPosition, out hit, 0.3f, NavMesh.AllAreas))
-            {
                 transform.position = hit.position;
-            }
         }
+    }
 
-        // Rotate
+    private void Rotate(Vector3 moveInput, bool hasInput)
+    {
         Vector3 inputDirection = hasInput ? moveInput : m_LastInputDirection;
         m_LastInputDirection = inputDirection;
         if (inputDirection != Vector3.zero)

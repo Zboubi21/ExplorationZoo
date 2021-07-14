@@ -5,38 +5,59 @@ public class Interactor : MonoBehaviour
     [SerializeField] private Vector3 m_InteractionOffset = Vector3.zero;
     [SerializeField] private float m_Radius = 1;
     [SerializeField] private LayerMask m_LayerMask = default;
+    [SerializeField] private InteractableType m_InteractionType = default;
 
     private IInteractable m_CurrentInteractable;
     private IInteractable m_LastInteractable;
-
-    private void Update() => CheckInteractable();
 
     public void CheckInteractable()
     {
         Collider[] hitColliders = Physics.OverlapSphere(GetSpherePosition(), m_Radius, m_LayerMask);
 
-        if (hitColliders.Length > 0)
+        IInteractable interactable = null;
+        for (int i = 0, l = hitColliders.Length; i < l; i++)
         {
-            m_CurrentInteractable = hitColliders[0].GetComponent<IInteractable>();
+            IInteractable tempInteractable = hitColliders[i].GetComponent<IInteractable>();
+            if (tempInteractable.GetInteractableType() == m_InteractionType && tempInteractable.CanBeDetected(this))
+                interactable = tempInteractable;
+        }
+
+        if (interactable != null)
+        {
+            m_CurrentInteractable = interactable;
 
             if (m_CurrentInteractable != m_LastInteractable)
             {
-                m_LastInteractable?.OnExit();
+                m_LastInteractable?.OnExit(this);
                 m_LastInteractable = null;
 
-                m_CurrentInteractable.OnEnter();
+                m_CurrentInteractable.OnEnter(this);
             }
 
             m_LastInteractable = m_CurrentInteractable;
         }
         else
         {
-            m_LastInteractable?.OnExit();
-            m_LastInteractable = null;
+            if (m_CurrentInteractable != null)
+                m_CurrentInteractable = null;
+
+            if (m_LastInteractable != null)
+            {
+                m_LastInteractable?.OnExit(this);
+                m_LastInteractable = null;
+            }
         }
     }
 
-    public void TriggerInteraction() => m_CurrentInteractable?.OnInteract();
+    public bool TryTriggerInteraction()
+    {
+        if (m_CurrentInteractable != null)
+        {
+            m_CurrentInteractable.OnInteract(this);
+            return true;
+        }
+        return false;
+    }
 
     private void OnDrawGizmos()
     {
