@@ -448,10 +448,6 @@ PrefabInstance:
       propertyPath: m_Height
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1884657485663357592, guid: 4f4f9830fb9c3f14e82b3675765536c5, type: 3}
-      propertyPath: m_Radius
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1884657485663357593, guid: 4f4f9830fb9c3f14e82b3675765536c5, type: 3}
       propertyPath: m_RootOrder
       value: 0
