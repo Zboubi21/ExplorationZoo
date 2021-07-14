@@ -54,6 +54,8 @@ public class Interactor : MonoBehaviour
         if (m_CurrentInteractable != null)
         {
             m_CurrentInteractable.OnInteract(this);
+            m_CurrentInteractable = null;
+            m_LastInteractable = null;
             return true;
         }
         return false;

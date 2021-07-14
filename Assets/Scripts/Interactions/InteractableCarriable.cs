@@ -1,13 +1,21 @@
+﻿using System;
 using UnityEngine;
 
-public class InteractableAnimal : MonoBehaviour, IInteractable, ICarriable
+public class InteractableCarriable : MonoBehaviour, IInteractable, ICarriable
 {
+    /*********
+    * Events *
+    *********/
+    public event Action OnPickedUp;
+    public event Action OnPutedDown;
+
     /*****************
     * SerializeField *
     *****************/
     [SerializeField] private Material m_DefaultMaterial = null;
     [SerializeField] private Material m_InteractableMaterial = null;
     [SerializeField] private Renderer m_Renderer = null;
+    [SerializeField] private Transform m_CarryTransform = null;
 
     /**********
     * Private *
@@ -18,40 +26,40 @@ public class InteractableAnimal : MonoBehaviour, IInteractable, ICarriable
     /***************
     * Interactable *
     ***************/
-    public InteractableType GetInteractableType() => m_InteractableType;
+    public virtual InteractableType GetInteractableType() => m_InteractableType;
 
-    public bool CanBeDetected(Interactor _) => !m_IsCarried;
+    public virtual bool CanBeDetected(Interactor _) => !m_IsCarried;
 
-    public void OnEnter(Interactor _)
+    public virtual void OnEnter(Interactor _)
     {
-        //Debug.Log("OnEnter", this);
         m_Renderer.sharedMaterial = m_InteractableMaterial;
     }
 
-    public void OnInteract(Interactor interactor)
+    public virtual void OnInteract(Interactor interactor)
     {
-        //Debug.Log("OnInteract", this);
+        m_Renderer.sharedMaterial = m_DefaultMaterial;
         interactor.GetComponentInParent<ICarrier>().PickUp(this);
     }
 
-    public void OnExit(Interactor _)
+    public virtual void OnExit(Interactor _)
     {
-        //Debug.Log("OnExit", this);
         m_Renderer.sharedMaterial = m_DefaultMaterial;
     }
 
     /************
     * Carriable *
     ************/
-    public Transform GetTransform() => transform;
+    public virtual Transform GetTransform() => m_CarryTransform;
 
-    public void PickedUp()
+    public virtual void PickedUp()
     {
         m_IsCarried = true;
+        OnPickedUp?.Invoke();
     }
 
-    public void PutedDown()
+    public virtual void PutedDown()
     {
         m_IsCarried = false;
+        OnPutedDown?.Invoke();
     }
 }

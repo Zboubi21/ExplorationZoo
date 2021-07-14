@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
 
     private void InteractAction_Started(InputAction.CallbackContext context)
     {
-        //Debug.Log("Interaction started");
         m_Character.TryTriggerInteraction();
     }
 
@@ -40,7 +39,6 @@ public class PlayerController : MonoBehaviour
         m_MoveInputs = m_MoveAction.ReadValue<Vector2>();
         Vector3 moveInput = new Vector3(m_MoveInputs.x, 0, m_MoveInputs.y);
         bool hasInput = HasInput();
-        //Debug.Log("Look = " + moveInput);
 
         Move(moveInput, hasInput);
         Rotate(moveInput, hasInput);
