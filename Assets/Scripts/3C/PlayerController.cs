@@ -5,20 +5,32 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
+    /***********
+    * Constant *
+    ***********/
     private const string INPUT_MOVE = "Move";
     private const string INPUT_INTERACT = "Interact";
 
+    /*****************
+    * SerializeField *
+    *****************/
     [SerializeField] private float m_MoveSpeed = 5f;
     [SerializeField] private float m_RotationSpeed = 1.5f;
     [Space]
     [SerializeField] private Character m_Character = null;
 
+    /**********
+    * Private *
+    **********/
     private PlayerInput m_PlayerInput;
     private InputAction m_MoveAction;
     private InputAction m_InteractAction;
     private Vector2 m_MoveInputs;
     private Vector3 m_LastInputDirection;
 
+    /*****************
+    * Initialization *
+    *****************/
     private void Awake()
     {
         m_PlayerInput = GetComponent<PlayerInput>();
@@ -34,6 +46,9 @@ public class PlayerController : MonoBehaviour
         m_Character.TryTriggerInteraction();
     }
 
+    /*********
+    * Update *
+    *********/
     private void Update()
     {
         m_MoveInputs = m_MoveAction.ReadValue<Vector2>();
@@ -53,6 +68,7 @@ public class PlayerController : MonoBehaviour
             if (NavMesh.SamplePosition(newPosition, out hit, 0.3f, NavMesh.AllAreas))
                 transform.position = hit.position;
         }
+        m_Character.SetMoveAnimation(moveInput.magnitude);
     }
 
     private void Rotate(Vector3 moveInput, bool hasInput)
