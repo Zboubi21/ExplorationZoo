@@ -19,13 +19,13 @@ public class PlayerController : Controller
     public override void StartControl()
     {
         base.StartControl();
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
     }
 
     public override void StopControl()
     {
         base.StopControl();
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     public override void InteractAction_Started()

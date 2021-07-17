@@ -31,10 +31,12 @@ public class InteractableTriggerable : MonoBehaviour, IInteractable
         m_Renderer.sharedMaterial = m_InteractableMaterial;
     }
 
-    public void OnInteract(Interactor _)
+    public void OnInteract(Interactor interactor)
     {
         m_Renderer.sharedMaterial = m_DefaultMaterial;
-        PlayerManager.Instance.SwitchController(ControlType.Boat);
+        ICarryiable carryiable = interactor.GetComponentInParent<ICarryiable>();
+        carryiable.PickedUp();
+        GetComponentInParent<ICarryier>().PickUp(carryiable);
     }
 
     public void OnExit(Interactor _)

@@ -20,7 +20,7 @@ public class BoatController : Controller
     [SerializeField] private bool m_UseFollowerForward = true;
     [SerializeField] private Transform m_Follower = null;
     [SerializeField] private Floater[] m_Floaters = null;
-    [SerializeField] private Interactor m_PutableInteractor = null;
+    [SerializeField] private Boat m_Boat = null;
 
     /**********
     * Private *
@@ -47,6 +47,12 @@ public class BoatController : Controller
     {
         base.UpdateMoveInput(inputDirection, hasInput);
         m_InputDirectionNormalized = m_InputDirection.normalized;
+    }
+
+    public override void InteractAction_Started()
+    {
+        base.InteractAction_Started();
+        m_Boat.TryTriggerInteraction();
     }
 
     public override void StopControl()

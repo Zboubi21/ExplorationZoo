@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Character : MonoBehaviour, ICarryier
+public class Character : MonoBehaviour, ICarryier, ICarryiable
 {
     /***********
     * Constant *
@@ -19,6 +19,7 @@ public class Character : MonoBehaviour, ICarryier
     [SerializeField] private Transform m_PickUpPosition = null;
     [SerializeField] private Transform m_PutDownPosition = null;
     [Space]
+    [SerializeField] private Transform m_RootTransform = null;
     [SerializeField] private Animator m_Animator = null;
 
     /**********
@@ -49,6 +50,9 @@ public class Character : MonoBehaviour, ICarryier
         m_TriggerableInteractor.TryTriggerInteraction();
     }
 
+    /***********
+    * Carryier *
+    ***********/
     public bool CarryObject() => m_CurrentCarryiable != null;
 
     public void PickUp(ICarryiable carryiable)
@@ -74,6 +78,15 @@ public class Character : MonoBehaviour, ICarryier
 
         m_Animator.SetLayerWeight(ANIMATOR_CARRY_LAYER_ID, 0);
     }
+
+    /*************
+    * Carryiable *
+    *************/
+    public Transform GetTransform() => m_RootTransform;
+
+    public void PickedUp() { }
+
+    public void PutedDown() { }
 
     /************
     * Animation *
