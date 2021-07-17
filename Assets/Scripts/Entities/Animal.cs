@@ -21,7 +21,7 @@ public class Animal : MonoBehaviour
     [SerializeField] private bool m_ReturnToOldMoveAreaWhenMoved = false;
 
     [Header("References")]
-    [SerializeField] private InteractableCarriable m_InteractableCarriable = null;
+    [SerializeField] private InteractableCarryiable m_InteractableCarryiable = null;
     [SerializeField] private Animator m_Animator = null;
 
     /**********
@@ -46,8 +46,8 @@ public class Animal : MonoBehaviour
 
     private void AddListeners()
     {
-        m_InteractableCarriable.OnPickedUp += InteractableCarriable_OnPickedUp;
-        m_InteractableCarriable.OnPutedDown += InteractableCarriable_OnPutedDown;
+        m_InteractableCarryiable.OnPickedUp += InteractableCarryiable_OnPickedUp;
+        m_InteractableCarryiable.OnPutedDown += InteractableCarryiable_OnPutedDown;
     }
 
     /************
@@ -78,17 +78,17 @@ public class Animal : MonoBehaviour
         CheckArea();
     }
 
-    /************
-    * Carriable *
-    ************/
-    private void InteractableCarriable_OnPickedUp()
+    /*************
+    * Carryiable *
+    *************/
+    private void InteractableCarryiable_OnPickedUp()
     {
         m_Agent.enabled = false;
         StopCheckArea();
         m_Animator.SetBool(ANIMATION_Carry_NAME, true);
     }
 
-    private void InteractableCarriable_OnPutedDown()
+    private void InteractableCarryiable_OnPutedDown()
     {
         if (!m_ReturnToOldMoveAreaWhenMoved)
             m_ReferencePosition = transform.position;

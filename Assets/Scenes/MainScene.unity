@@ -969,7 +969,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5013173314894210946, guid: 68d8634b24e76d44187946c6fb338612, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5013173314894210946, guid: 68d8634b24e76d44187946c6fb338612, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1740,6 +1740,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594767529}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &606331528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 606331529}
+  - component: {fileID: 606331530}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &606331529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606331528}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1456334791}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &606331530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606331528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6005a422f346fce479938a263dc1d45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DefaultMaterial: {fileID: 0}
+  m_InteractableMaterial: {fileID: 0}
+  m_Renderer: {fileID: 0}
+  m_CarryTransform: {fileID: 0}
 --- !u!1 &616184311
 GameObject:
   m_ObjectHideFlags: 0
@@ -3168,7 +3215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ef306770b527f498440ff113bae37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CarriableInteractor: {fileID: 1903876655}
+  m_CarryiableInteractor: {fileID: 1903876655}
   m_PutableInteractor: {fileID: 616184313}
   m_PickUpPosition: {fileID: 2138457029}
   m_PutDownPosition: {fileID: 1560433620}
@@ -4167,6 +4214,7 @@ Transform:
   m_Children:
   - {fileID: 326588267}
   - {fileID: 250925724}
+  - {fileID: 606331529}
   m_Father: {fileID: 2046418952}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -5511,7 +5559,7 @@ GameObject:
   - component: {fileID: 1903876654}
   - component: {fileID: 1903876655}
   m_Layer: 0
-  m_Name: Carryable_Interactor
+  m_Name: Carryiable_Interactor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

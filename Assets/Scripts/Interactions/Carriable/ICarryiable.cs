@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface ICarriable
+public interface ICarryiable
 {
     Transform GetTransform();
     void PickedUp();

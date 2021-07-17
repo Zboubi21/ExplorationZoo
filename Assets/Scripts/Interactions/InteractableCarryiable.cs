@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class InteractableCarriable : MonoBehaviour, IInteractable, ICarriable
+public class InteractableCarryiable : MonoBehaviour, IInteractable, ICarryiable
 {
     /*********
     * Events *
@@ -20,15 +20,15 @@ public class InteractableCarriable : MonoBehaviour, IInteractable, ICarriable
     /**********
     * Private *
     **********/
-    private InteractableType m_InteractableType = InteractableType.Carriable;
-    private bool m_IsCarried = false;
+    private InteractableType m_InteractableType = InteractableType.Carryiable;
+    private bool m_IsCarryied = false;
 
     /***************
     * Interactable *
     ***************/
     public virtual InteractableType GetInteractableType() => m_InteractableType;
 
-    public virtual bool CanBeDetected(Interactor _) => !m_IsCarried;
+    public virtual bool CanBeDetected(Interactor _) => !m_IsCarryied;
 
     public virtual void OnEnter(Interactor _)
     {
@@ -38,7 +38,7 @@ public class InteractableCarriable : MonoBehaviour, IInteractable, ICarriable
     public virtual void OnInteract(Interactor interactor)
     {
         m_Renderer.sharedMaterial = m_DefaultMaterial;
-        interactor.GetComponentInParent<ICarrier>().PickUp(this);
+        interactor.GetComponentInParent<ICarryier>().PickUp(this);
     }
 
     public virtual void OnExit(Interactor _)
@@ -46,20 +46,20 @@ public class InteractableCarriable : MonoBehaviour, IInteractable, ICarriable
         m_Renderer.sharedMaterial = m_DefaultMaterial;
     }
 
-    /************
-    * Carriable *
-    ************/
+    /*************
+    * Carryiable *
+    *************/
     public virtual Transform GetTransform() => m_CarryTransform;
 
     public virtual void PickedUp()
     {
-        m_IsCarried = true;
+        m_IsCarryied = true;
         OnPickedUp?.Invoke();
     }
 
     public virtual void PutedDown()
     {
-        m_IsCarried = false;
+        m_IsCarryied = false;
         OnPutedDown?.Invoke();
     }
 }

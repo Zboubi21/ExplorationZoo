@@ -1,6 +1,6 @@
 public enum InteractableType
 {
-    Carriable,
+    Carryiable,
     Putable,
     Triggerable
 }

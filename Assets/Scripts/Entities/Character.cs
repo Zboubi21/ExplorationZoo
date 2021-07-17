@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Character : MonoBehaviour, ICarrier
+public class Character : MonoBehaviour, ICarryier
 {
     /***********
     * Constant *
@@ -12,7 +12,7 @@ public class Character : MonoBehaviour, ICarrier
     * SerializeField *
     *****************/
     [Header("Interactions")]
-    [SerializeField] private Interactor m_CarriableInteractor = null;
+    [SerializeField] private Interactor m_CarryiableInteractor = null;
     [SerializeField] private Interactor m_PutableInteractor = null;
     [Space]
     [SerializeField] private Transform m_PickUpPosition = null;
@@ -23,7 +23,7 @@ public class Character : MonoBehaviour, ICarrier
     /**********
     * Private *
     **********/
-    private ICarriable m_CurrentCarriable = null;
+    private ICarryiable m_CurrentCarryiable = null;
 
     /*********
     * Update *
@@ -33,7 +33,7 @@ public class Character : MonoBehaviour, ICarrier
         if (CarryObject())
             m_PutableInteractor.CheckInteractable();
         else
-            m_CarriableInteractor.CheckInteractable();
+            m_CarryiableInteractor.CheckInteractable();
     }
 
     /**************
@@ -44,31 +44,31 @@ public class Character : MonoBehaviour, ICarrier
         if (CarryObject())
             m_PutableInteractor.TryTriggerInteraction();
         else
-            m_CarriableInteractor.TryTriggerInteraction();
+            m_CarryiableInteractor.TryTriggerInteraction();
     }
 
-    public bool CarryObject() => m_CurrentCarriable != null;
+    public bool CarryObject() => m_CurrentCarryiable != null;
 
-    public void PickUp(ICarriable carriable)
+    public void PickUp(ICarryiable carryiable)
     {
-        Transform carriedTransform = carriable.GetTransform();
-        carriedTransform.position = m_PickUpPosition.position;
-        carriedTransform.parent = m_PickUpPosition.transform;
-        carriable.PickedUp();
+        Transform carryiedTransform = carryiable.GetTransform();
+        carryiedTransform.position = m_PickUpPosition.position;
+        carryiedTransform.parent = m_PickUpPosition.transform;
+        carryiable.PickedUp();
 
-        m_CurrentCarriable = carriable;
+        m_CurrentCarryiable = carryiable;
 
         m_Animator.SetLayerWeight(ANIMATOR_CARRY_LAYER_ID, 1);
     }
 
     public void PutDown()
     {
-        Transform carriedTransform = m_CurrentCarriable.GetTransform();
-        carriedTransform.position = m_PutDownPosition.position;
-        carriedTransform.parent = null;
-        m_CurrentCarriable.PutedDown();
+        Transform carryiedTransform = m_CurrentCarryiable.GetTransform();
+        carryiedTransform.position = m_PutDownPosition.position;
+        carryiedTransform.parent = null;
+        m_CurrentCarryiable.PutedDown();
 
-        m_CurrentCarriable = null;
+        m_CurrentCarryiable = null;
 
         m_Animator.SetLayerWeight(ANIMATOR_CARRY_LAYER_ID, 0);
     }

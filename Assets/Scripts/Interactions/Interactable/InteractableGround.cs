@@ -16,7 +16,7 @@ public class InteractableGround : MonoBehaviour, IInteractable
     public void OnInteract(Interactor interactor)
     {
         //Debug.Log("InteractableGround_OnInteract", this);
-        interactor.GetComponentInParent<ICarrier>().PutDown();
+        interactor.GetComponentInParent<ICarryier>().PutDown();
     }
 
     public void OnExit(Interactor _)

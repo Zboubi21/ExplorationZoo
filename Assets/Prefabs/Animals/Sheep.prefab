@@ -428,6 +428,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: e1bf54f4af8a81a45bbe96f39dde1ed6, type: 2}
+    - target: {fileID: 1884657485372637968, guid: 4f4f9830fb9c3f14e82b3675765536c5, type: 3}
+      propertyPath: m_Name
+      value: Interactable Carryiable
+      objectReference: {fileID: 0}
     - target: {fileID: 1884657485372637974, guid: 4f4f9830fb9c3f14e82b3675765536c5, type: 3}
       propertyPath: m_Renderer
       value: 
@@ -492,6 +496,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1884657485663357599, guid: 4f4f9830fb9c3f14e82b3675765536c5, type: 3}
+      propertyPath: m_InteractableCarryiable
+      value: 
+      objectReference: {fileID: 5013173315056479757}
     - target: {fileID: 6669200487070787337, guid: 4f4f9830fb9c3f14e82b3675765536c5, type: 3}
       propertyPath: m_Height
       value: 2
@@ -511,3 +519,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1884657483717523476, guid: 4f4f9830fb9c3f14e82b3675765536c5, type: 3}
   m_PrefabInstance: {fileID: 6896694857801297179}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5013173315056479757 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1884657485372637974, guid: 4f4f9830fb9c3f14e82b3675765536c5, type: 3}
+  m_PrefabInstance: {fileID: 6896694857801297179}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6005a422f346fce479938a263dc1d45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
