@@ -19,9 +19,14 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
     /*****************
     * SerializeField *
     *****************/
-    [SerializeField] private ControlType m_ControlType = ControlType.None;
+    [HideInInspector] [SerializeField] private ControlType m_ControlType = ControlType.None;
     [SerializeField] private Controller m_PlayerController = null;
     [SerializeField] private Controller m_BoatController = null;
+
+    /**********
+    * Getters *
+    **********/
+    public ControlType ControlType => m_ControlType;
 
     /**********
     * Private *

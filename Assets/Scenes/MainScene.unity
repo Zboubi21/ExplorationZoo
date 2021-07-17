@@ -3297,7 +3297,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DontDestroyOnLoad: 0
-  m_ShowInstanceError: 0
   m_Amplitude: 0.5
   m_Length: 5
   m_Speed: 1
@@ -3902,8 +3901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DontDestroyOnLoad: 0
-  m_ShowInstanceError: 0
-  m_ControlType: 2
+  m_ControlType: 1
   m_PlayerController: {fileID: 80257946}
   m_BoatController: {fileID: 1456334792}
 --- !u!4 &1236105308
@@ -4106,7 +4104,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DontDestroyOnLoad: 0
-  m_ShowInstanceError: 0
   m_CharacterCamera: {fileID: 2124817840}
   m_BoatCamera: {fileID: 1819005429}
 --- !u!4 &1424726629
@@ -4803,8 +4800,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 10.606602, z: -10.606602}
+  m_LocalRotation: {x: 0.36812454, y: -0, z: -0, w: 0.9297765}
+  m_LocalPosition: {x: -10, y: 7.84547, z: 7.7103133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 537108550}
@@ -5210,7 +5207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1819005430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5716,7 +5713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2124817841
 MonoBehaviour:
   m_ObjectHideFlags: 0
