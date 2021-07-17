@@ -1,18 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableTriggerable : MonoBehaviour
+public class InteractableTriggerable : MonoBehaviour, IInteractable
 {
-    // Start is called before the first frame update
-    void Start()
+    /*****************
+    * SerializeField *
+    *****************/
+    [SerializeField] private Renderer m_Renderer = null;
+    [SerializeField] private Material m_DefaultMaterial = null;
+    [SerializeField] private Material m_InteractableMaterial = null;
+
+    /**********
+    * Private *
+    **********/
+    private InteractableType m_InteractableType = InteractableType.Triggerable;
+
+    /***************
+    * Interactable *
+    ***************/
+    public bool CanBeDetected(Interactor _)
     {
-        
+        return true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public InteractableType GetInteractableType() => m_InteractableType;
+
+    public Transform GetTransform() => transform;
+
+    public void OnEnter(Interactor _)
     {
-        
+        m_Renderer.sharedMaterial = m_InteractableMaterial;
+    }
+
+    public void OnInteract(Interactor _)
+    {
+        m_Renderer.sharedMaterial = m_DefaultMaterial;
+        PlayerManager.Instance.SwitchController(ControlType.Boat);
+    }
+
+    public void OnExit(Interactor _)
+    {
+        m_Renderer.sharedMaterial = m_DefaultMaterial;
     }
 }

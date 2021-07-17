@@ -16,6 +16,18 @@ public class PlayerController : Controller
     /***********
     * Controls *
     ***********/
+    public override void StartControl()
+    {
+        base.StartControl();
+        gameObject.SetActive(true);
+    }
+
+    public override void StopControl()
+    {
+        base.StopControl();
+        gameObject.SetActive(false);
+    }
+
     public override void InteractAction_Started()
     {
         base.InteractAction_Started();

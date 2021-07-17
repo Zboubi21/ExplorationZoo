@@ -20,6 +20,7 @@ public class BoatController : Controller
     [SerializeField] private bool m_UseFollowerForward = true;
     [SerializeField] private Transform m_Follower = null;
     [SerializeField] private Floater[] m_Floaters = null;
+    [SerializeField] private Interactor m_PutableInteractor = null;
 
     /**********
     * Private *
@@ -54,10 +55,25 @@ public class BoatController : Controller
         m_InputDirectionNormalized = Vector3.zero;
     }
 
+    /*********
+    * Update *
+    *********/
+    private void Update()
+    {
+        UpdateSpeeds();
+    }
+
+    private void FixedUpdate()
+    {
+        Rotate();
+        Move();
+        Float();
+    }
+
     /*******
     * Core *
     *******/
-    private void Update()
+    private void UpdateSpeeds()
     {
         float targetRotationSpeed = Mathf.Lerp(0, m_MaxRotationSpeed, GetMaxAbsInput(false));
         float targetMovementSpeed = Mathf.Lerp(0, m_MaxMovementSpeed, GetMaxAbsInput(false));
@@ -69,7 +85,7 @@ public class BoatController : Controller
         m_CurrentMovementSpeed = Mathf.SmoothDamp(m_CurrentMovementSpeed, targetMovementSpeed, ref m_CurrentMovementVelocity, accelerationDecelerationMovementSpeed);
     }
 
-    private void FixedUpdate()
+    private void Rotate()
     {
         Vector3 relativePos = m_HasInput ? m_InputDirectionNormalized : m_LastInputDirection;
         m_LastInputDirection = relativePos;
@@ -80,7 +96,10 @@ public class BoatController : Controller
             Quaternion currentRotation = Quaternion.Slerp(transform.rotation, targetRotation, m_CurrentRotationSpeed * Time.deltaTime);
             m_Rigidbody.MoveRotation(currentRotation);
         }
+    }
 
+    private void Move()
+    {
         if (m_UseFollowerForward)
         {
             m_Follower.position = transform.position;
@@ -90,11 +109,17 @@ public class BoatController : Controller
 
         Vector3 forward = m_UseFollowerForward ? m_Follower.forward : transform.forward;
         m_Rigidbody.MovePosition(m_Rigidbody.position + forward * m_CurrentMovementSpeed * Time.deltaTime);
+    }
 
+    private void Float()
+    {
         for (int i = 0, l = m_Floaters.Length; i < l; i++)
             m_Floaters[i].CustomUpdate();
     }
 
+    /*********
+    * Helper *
+    *********/
     private float GetMaxAbsInput(bool normalized)
     {
         Vector3 inputs = normalized ? m_InputDirectionNormalized : m_InputDirection;

@@ -107,6 +107,18 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 
         m_ControlType = controlType;
 
+        switch (m_ControlType)
+        {
+            case ControlType.None:
+                break;
+            case ControlType.Character:
+                m_PlayerController.StartControl();
+                break;
+            case ControlType.Boat:
+                m_BoatController.StartControl();
+                break;
+        }
+
         CameraManager.Instance.SwitchController(controlType);
     }
 }

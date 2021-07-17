@@ -6,6 +6,8 @@ public class InteractableGround : MonoBehaviour, IInteractable
 
     public InteractableType GetInteractableType() => m_InteractableType;
 
+    public Transform GetTransform() => transform;
+
     public bool CanBeDetected(Interactor _) => true;
 
     public void OnEnter(Interactor _)

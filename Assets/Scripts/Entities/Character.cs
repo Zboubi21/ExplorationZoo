@@ -14,6 +14,7 @@ public class Character : MonoBehaviour, ICarryier
     [Header("Interactions")]
     [SerializeField] private Interactor m_CarryiableInteractor = null;
     [SerializeField] private Interactor m_PutableInteractor = null;
+    [SerializeField] private Interactor m_TriggerableInteractor = null;
     [Space]
     [SerializeField] private Transform m_PickUpPosition = null;
     [SerializeField] private Transform m_PutDownPosition = null;
@@ -25,26 +26,27 @@ public class Character : MonoBehaviour, ICarryier
     **********/
     private ICarryiable m_CurrentCarryiable = null;
 
-    /*********
-    * Update *
-    *********/
+    /**************
+    * Interaction *
+    **************/
     private void Update()
     {
         if (CarryObject())
             m_PutableInteractor.CheckInteractable();
         else
             m_CarryiableInteractor.CheckInteractable();
+        
+        m_TriggerableInteractor.CheckInteractable();
     }
-
-    /**************
-    * Interaction *
-    **************/
+    
     public void TryTriggerInteraction()
     {
         if (CarryObject())
             m_PutableInteractor.TryTriggerInteraction();
         else
             m_CarryiableInteractor.TryTriggerInteraction();
+
+        m_TriggerableInteractor.TryTriggerInteraction();
     }
 
     public bool CarryObject() => m_CurrentCarryiable != null;

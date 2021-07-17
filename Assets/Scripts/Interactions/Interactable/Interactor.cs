@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class Interactor : MonoBehaviour
@@ -7,24 +8,28 @@ public class Interactor : MonoBehaviour
     [SerializeField] private LayerMask m_LayerMask = default;
     [SerializeField] private InteractableType m_InteractionType = default;
 
+    public IInteractable CurrentInteractable => m_CurrentInteractable;
+
     private IInteractable m_CurrentInteractable;
     private IInteractable m_LastInteractable;
 
     public void CheckInteractable()
     {
+        Vector3 detectionPosition = GetSpherePosition();
         Collider[] hitColliders = Physics.OverlapSphere(GetSpherePosition(), m_Radius, m_LayerMask);
+        Collider[] orderedHitColliders = hitColliders.OrderBy(c => (detectionPosition - c.transform.position).sqrMagnitude).ToArray();
 
-        IInteractable interactable = null;
-        for (int i = 0, l = hitColliders.Length; i < l; i++)
+        IInteractable detectedInteractable = null;
+        for (int i = 0, l = orderedHitColliders.Length; i < l; i++)
         {
-            IInteractable tempInteractable = hitColliders[i].GetComponent<IInteractable>();
+            IInteractable tempInteractable = orderedHitColliders[i].GetComponent<IInteractable>();
             if (tempInteractable.GetInteractableType() == m_InteractionType && tempInteractable.CanBeDetected(this))
-                interactable = tempInteractable;
+                detectedInteractable = tempInteractable;
         }
 
-        if (interactable != null)
+        if (detectedInteractable != null)
         {
-            m_CurrentInteractable = interactable;
+            m_CurrentInteractable = detectedInteractable;
 
             if (m_CurrentInteractable != m_LastInteractable)
             {
